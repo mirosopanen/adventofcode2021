@@ -45,17 +45,18 @@
 
 import os
 
-with open('measurements.txt', 'r') as f:
-    measurements = f.readlines()
-
-ints = [int(item) for item in measurements]
-
+measurements = []
 counter = 0
-for obj in ints:
-    if obj > obj-1:
+
+for obj in open("measurements.txt", "r"):
+    measurements.append(obj.strip())
+
+measurements = [int(i) for i in measurements]
+
+for idx in range(1, len(measurements)):
+    if measurements[idx - 1] < measurements[idx]:
         counter += 1
     else:
         continue
-
 
 print(counter)
