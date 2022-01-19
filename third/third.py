@@ -30,3 +30,38 @@
 # The epsilon rate is calculated in a similar way; rather than use the most common bit, the least common bit from each position is used. So, the epsilon rate is 01001, or 9 in decimal. Multiplying the gamma rate (22) by the epsilon rate (9) produces the power consumption, 198.
 
 # Use the binary numbers in your diagnostic report to calculate the gamma rate and epsilon rate, then multiply them together. What is the power consumption of the submarine? (Be sure to represent your answer in decimal, not binary.)
+
+
+binaries = []
+
+for objects in open('puzzleinput.txt', 'r'):
+    binaries.append(objects.strip())
+
+
+def checkElements():
+
+    gamma = 0
+
+    epsilon = 0
+    n = 2**(len(binaries[0])-1)
+    for i in range(len(binaries[0])):
+        ones = sum([int(x[i]) for x in binaries])
+
+        zeros = len(binaries)-ones
+
+        if ones >= zeros:
+            gamma += n
+        else:
+            epsilon += n
+        n /= 2
+
+    print(f'Gamma: {gamma}, Epsilon: {epsilon}')
+    print(gamma*epsilon)
+
+
+def main():
+    checkElements()
+
+
+if __name__ == '__main__':
+    main()
